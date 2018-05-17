@@ -15,6 +15,7 @@ use DRL\AMFL\Commands\MigrateMakeCommand;
 use DRL\AMFL\Commands\ConsoleMakeCommand;
 use DRL\AMFL\Commands\RequestMakeCommand;
 use DRL\AMFL\Commands\FactoryMakeCommand;
+use DRL\AMFL\Commands\ChannelMakeCommand;
 use DRL\AMFL\Commands\ListenerMakeCommand;
 use DRL\AMFL\Commands\ProviderMakeCommand;
 use DRL\AMFL\Commands\ResourceMakeCommand;
@@ -22,6 +23,7 @@ use DRL\AMFL\Commands\ExceptionMakeCommand;
 use DRL\AMFL\Commands\ControllerMakeCommand;
 use DRL\AMFL\Commands\MiddlewareMakeCommand;
 use DRL\AMFL\Commands\NotificationMakeCommand;
+
 
 class ArtisanServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,7 @@ class ArtisanServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
+        'ChannelMake' => 'command.channel.make',
         'ConsoleMake' => 'command.console.make',
         'ControllerMake' => 'command.controller.make',
         'EventMake' => 'command.event.make',
@@ -329,6 +332,18 @@ class ArtisanServiceProvider extends ServiceProvider
     {
         $this->app->singleton('command.rule.make', function ($app) {
             return new RuleMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerChannelMakeCommand()
+    {
+        $this->app->singleton('command.channel.make', function ($app) {
+            return new ChannelMakeCommand($app['files']);
         });
     }
 

@@ -11,6 +11,7 @@ return [
     */
 
     'namespaces' => [
+        'channel' => '{root}\{prefix}\Broadcasting\{suffix}',
         'command' => '{root}\{prefix}\Commands\{suffix}',
         'controller' => '{root}\{prefix}\Controllers\{suffix}',
         'event' => '{root}\{prefix}\Events\{suffix}',
