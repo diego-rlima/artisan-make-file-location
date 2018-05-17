@@ -11,22 +11,22 @@ return [
     */
 
     'namespaces' => [
-        'job' => '{root}\{prefix}\Jobs\{suffix}',
-        'mail' => '{root}\{prefix}\Mail\{suffix}',
-        'test' => [
-            'unit' => '{root}\{prefix}\Unit\{suffix}',
-            'feature' => '{root}\{prefix}\Feature\{suffix}',
-        ],
-        'event' => '{root}\{prefix}\Events\{suffix}',
-        'model' => '{root}\{prefix}\\',
-        'policy' => '{root}\{prefix}\Policies\{suffix}',
         'command' => '{root}\{prefix}\Commands\{suffix}',
-        'request' => '{root}\{prefix}\Requests\{suffix}',
-        'listener' => '{root}\{prefix}\Listeners\{suffix}',
-        'provider' => '{root}\{prefix}\Providers\{suffix}',
-        'notification' => '{root}\{prefix}\Notifications\{suffix}',
         'controller' => '{root}\{prefix}\Controllers\{suffix}',
+        'event' => '{root}\{prefix}\Events\{suffix}',
+        'job' => '{root}\{prefix}\Jobs\{suffix}',
+        'listener' => '{root}\{prefix}\Listeners\{suffix}',
+        'mail' => '{root}\{prefix}\Mail\{suffix}',
         'middleware' => '{root}\{prefix}\Middleware\{suffix}',
+        'model' => '{root}\{prefix}\\',
+        'notification' => '{root}\{prefix}\Notifications\{suffix}',
+        'policy' => '{root}\{prefix}\Policies\{suffix}',
+        'provider' => '{root}\{prefix}\Providers\{suffix}',
+        'request' => '{root}\{prefix}\Requests\{suffix}',
+        'test' => [
+            'feature' => '{root}\{prefix}\Feature\{suffix}',
+            'unit' => '{root}\{prefix}\Unit\{suffix}',
+        ],
     ],
 
     /*
@@ -40,8 +40,8 @@ return [
     */
 
     'locations' => [
-        'seeder' => '{root}/{prefix}/seeds/{name}.php',
         'migration' => '{root}/{prefix}/migrations',
+        'seeder' => '{root}/{prefix}/seeds/{name}.php',
     ],
 
 ];
