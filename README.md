@@ -46,7 +46,7 @@ Publish the config using the following command:
 $ php artisan vendor:publish --provider="DRL\AMFL\ArtisanServiceProvider"
 ```
 
-Now you have a [config/amfl.php](https://github.com/diego-rlima/artisan-make-file-location/blob/1.0/config/amfl.php) file.
+Now you have a [config/amfl.php](https://github.com/diego-rlima/artisan-make-file-location/blob/1.1/config/amfl.php) file.
 The settings are divided between files that have namespaces and files that they do not have.
 
 ```php
