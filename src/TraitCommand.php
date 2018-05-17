@@ -30,7 +30,10 @@ trait TraitCommand
             $configReplace[2] = '\\' . $suffix;
         }
 
-        return str_replace($configMatch, $configReplace, $namespace);
+        return rtrim(
+            str_replace($configMatch, $configReplace, $namespace),
+            '\\'
+        );
     }
 
     /**
