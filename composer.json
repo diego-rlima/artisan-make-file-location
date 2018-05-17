@@ -17,5 +17,12 @@
         "psr-4": {
             "DRL\\AMFL\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DRL\\AMFL\\ArtisanServiceProvider"
+            ]
+        }
     }
 }
