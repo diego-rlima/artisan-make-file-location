@@ -5,6 +5,7 @@ namespace DRL\AMFL;
 use DRL\AMFL\Commands\JobMakeCommand;
 use DRL\AMFL\Commands\MailMakeCommand;
 use DRL\AMFL\Commands\TestMakeCommand;
+use DRL\AMFL\Commands\RuleMakeCommand;
 use Illuminate\Support\ServiceProvider;
 use DRL\AMFL\Commands\EventMakeCommand;
 use DRL\AMFL\Commands\ModelMakeCommand;
@@ -13,8 +14,11 @@ use DRL\AMFL\Commands\SeederMakeCommand;
 use DRL\AMFL\Commands\MigrateMakeCommand;
 use DRL\AMFL\Commands\ConsoleMakeCommand;
 use DRL\AMFL\Commands\RequestMakeCommand;
+use DRL\AMFL\Commands\FactoryMakeCommand;
 use DRL\AMFL\Commands\ListenerMakeCommand;
 use DRL\AMFL\Commands\ProviderMakeCommand;
+use DRL\AMFL\Commands\ResourceMakeCommand;
+use DRL\AMFL\Commands\ExceptionMakeCommand;
 use DRL\AMFL\Commands\ControllerMakeCommand;
 use DRL\AMFL\Commands\MiddlewareMakeCommand;
 use DRL\AMFL\Commands\NotificationMakeCommand;
@@ -37,6 +41,8 @@ class ArtisanServiceProvider extends ServiceProvider
         'ConsoleMake' => 'command.console.make',
         'ControllerMake' => 'command.controller.make',
         'EventMake' => 'command.event.make',
+        'ExceptionMake' => 'command.exception.make',
+        'FactoryMake' => 'command.factory.make',
         'JobMake' => 'command.job.make',
         'ListenerMake' => 'command.listener.make',
         'MailMake' => 'command.mail.make',
@@ -47,6 +53,8 @@ class ArtisanServiceProvider extends ServiceProvider
         'PolicyMake' => 'command.policy.make',
         'ProviderMake' => 'command.provider.make',
         'RequestMake' => 'command.request.make',
+        'ResourceMake' => 'command.resource.make',
+        'RuleMake' => 'command.rule.make',
         'SeederMake' => 'command.seeder.make',
         'TestMake' => 'command.test.make',
     ];
@@ -273,6 +281,54 @@ class ArtisanServiceProvider extends ServiceProvider
     {
         $this->app->singleton('command.policy.make', function ($app) {
             return new PolicyMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerExceptionMakeCommand()
+    {
+        $this->app->singleton('command.exception.make', function ($app) {
+            return new ExceptionMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerFactoryMakeCommand()
+    {
+        $this->app->singleton('command.factory.make', function ($app) {
+            return new FactoryMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerResourceMakeCommand()
+    {
+        $this->app->singleton('command.resource.make', function ($app) {
+            return new ResourceMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerRuleMakeCommand()
+    {
+        $this->app->singleton('command.rule.make', function ($app) {
+            return new RuleMakeCommand($app['files']);
         });
     }
 
