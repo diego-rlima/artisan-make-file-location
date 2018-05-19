@@ -17,6 +17,16 @@ class MailMakeCommand extends OriginalMailMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'mail');
+        return $this->amflCustomNamespace($rootNamespace);
+    }
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    protected function amflInit()
+    {
+        $this->amflCommandSetup('mail');
     }
 }

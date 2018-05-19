@@ -17,16 +17,16 @@ class MiddlewareMakeCommand extends OriginalMiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'middleware');
+        return $this->amflCustomNamespace($rootNamespace);
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'Http';
+        $this->amflCommandSetup('middleware');
     }
 }

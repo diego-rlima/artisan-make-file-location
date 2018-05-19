@@ -17,16 +17,16 @@ class ControllerMakeCommand extends OriginalControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'controller');
+        return $this->amflCustomNamespace($rootNamespace);
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'Http';
+        $this->amflCommandSetup('controller');
     }
 }

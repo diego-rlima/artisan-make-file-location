@@ -28,9 +28,24 @@ class TestMakeCommand extends OriginalTestMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        $type = $this->option('unit') ? 'unit' : 'feature';
+        $type = $this->option('unit') ? 'Unit' : 'Feature';
+        $namespace = $this->amflCustomNamespace($rootNamespace);
 
-        return $this->amflCustomNamespace($rootNamespace, 'test.' . $type);
+        return $this->getCommandSetup()->replace(
+            'type',
+            $type,
+            $namespace
+        );
+    }
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    protected function amflInit()
+    {
+        $this->amflCommandSetup('test');
     }
 
     /**
@@ -52,13 +67,11 @@ class TestMakeCommand extends OriginalTestMakeCommand
      */
     protected function getOptions()
     {
-        $options = [
+        $this->amflInit();
+        $this->amflOptions();
+
+        return [
             ['unit', null, InputOption::VALUE_NONE, 'Create a unit test.'],
         ];
-
-        return array_merge(
-            $options,
-            $this->amflOptions()
-        );
     }
 }
