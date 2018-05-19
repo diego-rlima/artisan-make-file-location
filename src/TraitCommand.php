@@ -15,7 +15,7 @@ trait TraitCommand
      */
     protected function amflCustomNamespace($rootNamespace, $config)
     {
-        $namespace = config('amfl.namespaces.' . $config);
+        $namespace = config('amfl.' . $config);
         $configMatch = ['{root}', '{prefix}\\', '\\{suffix}'];
         $configReplace = [$rootNamespace, '', ''];
 
@@ -46,7 +46,7 @@ trait TraitCommand
      */
     protected function amflCustomPath($rootPath, $config, $name = '')
     {
-        $path = config('amfl.locations.' . $config);
+        $path = config('amfl.' . $config);
         $configMatch = ['{root}', '{name}', '{prefix}/'];
         $configReplace = [$rootPath, $name, ''];
 
