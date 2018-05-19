@@ -8,6 +8,12 @@ This package requires **Laravel 5.4 or later**.
 ```bash
 $ composer require diego-rlima/artisan-make-file-location
 ```
+For Laravel 5.4, you must register the service provider of this package.
+Add the code below in the **providers** section of your `config/app.php` file.
+
+```php
+DRL\AMFL\ArtisanServiceProvider::class,
+```
 
 ## Using
 You can use all "artisan make" commands as usual. But now, you can add the options **--prefix** and **--suffix** to change the namespace of your files.
