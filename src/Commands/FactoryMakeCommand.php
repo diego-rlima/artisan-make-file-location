@@ -21,16 +21,16 @@ class FactoryMakeCommand extends OriginalFactoryMakeCommand
             ['\\', '/'], '', $this->argument('name')
         );
 
-        return $this->amflCustomPath($this->laravel->basePath(), 'factory', $name);
+        return $this->amflCustomPath($this->laravel->basePath(), $name);
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'database';
+        $this->amflCommandSetup('factory');
     }
 }

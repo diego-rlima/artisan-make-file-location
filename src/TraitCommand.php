@@ -3,93 +3,101 @@
 namespace DRL\AMFL;
 
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 trait TraitCommand
 {
     /**
+     * The CommandSetup instance.
+     *
+     * @return CommandSetup
+     */
+    protected $amflSetup;
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    abstract protected function amflInit();
+
+    /**
+     * Initializes the settings.
+     *
+     * @param  string  $command
+     * @return CommandSetup
+     */
+    public function amflCommandSetup(string $command)
+    {
+        $this->amflSetup = new CommandSetup($this, $command);
+
+        return $this->amflSetup;
+    }
+
+    /**
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @param  string  $config
      * @return string
      */
-    protected function amflCustomNamespace($rootNamespace, $config)
+    protected function amflCustomNamespace($rootNamespace): string
     {
-        $namespace = config('amfl.' . $config);
-        $configMatch = ['{root}', '{prefix}\\', '\\{suffix}'];
-        $configReplace = [$rootNamespace, '', ''];
-
-        $prefix = $this->option('prefix') ?: $this->amflDefaultPrefix();
-        $suffix = $this->option('suffix') ?: $this->amflDefaultSuffix();
-
-        if ($prefix) {
-            $configReplace[1] = $prefix . '\\';
-        }
-
-        if ($suffix) {
-            $configReplace[2] = '\\' . $suffix;
-        }
-
-        return rtrim(
-            str_replace($configMatch, $configReplace, $namespace),
-            '\\'
+        return $this->amflSetup->replace(
+            'root',
+            $rootNamespace,
+            $this->amflSetup->getFormattedConfig()
         );
     }
 
     /**
-     * Get the default namespace for the class.
+     * Get the default path for the file.
      *
      * @param  string  $rootPath
-     * @param  string  $config
      * @param  string  $name
      * @return string
      */
-    protected function amflCustomPath($rootPath, $config, $name = '')
+    protected function amflCustomPath($rootPath, $name = ''): string
     {
-        $path = config('amfl.' . $config);
-        $configMatch = ['{root}', '{name}', '{prefix}/'];
-        $configReplace = [$rootPath, $name, ''];
+        $path = $this->amflSetup->replace(
+            'root',
+            $rootPath,
+            $this->amflSetup->getFormattedConfig()
+        );
 
-        $prefix = $this->option('prefix') ?: $this->amflDefaultPrefix();
+        $path = $this->amflSetup->replace(
+            'name',
+            $name,
+            $path
+        );
 
-        if ($prefix) {
-            $configReplace[2] = $prefix . '/';
-        }
-
-        return str_replace($configMatch, $configReplace, $path);
+        return $path;
     }
 
     /**
-     * Get the console command custom options.
+     * Adds the options.
      *
-     * @return array
+     * @return void
      */
     protected function amflOptions()
     {
-        return [
-            ['prefix', null, InputOption::VALUE_OPTIONAL, 'Set the custom namespace/path prefix.'],
-            ['suffix', null, InputOption::VALUE_OPTIONAL, 'Set the custom namespace suffix.'],
-        ];
+        $this->amflSetup->loadOptions();
+
+        foreach ($this->amflSetup->getOptions() as $option => $description) {
+            $data = $this->amflSetup->getOptionData($option);
+            $default = !$data['required'] ? $data['default'] : null;
+
+            $this->addOption($option, null, InputOption::VALUE_REQUIRED, $description, $default);
+        }
     }
 
     /**
-     * Get the default prefix.
+     * Get the CommandSetup instance.
      *
-     * @return false|string
+     * @return CommandSetup
      */
-    protected function amflDefaultPrefix()
+    protected function getCommandSetup()
     {
-        return false;
-    }
-
-    /**
-     * Get the default suffix.
-     *
-     * @return false|string
-     */
-    protected function amflDefaultSuffix()
-    {
-        return false;
+        return $this->amflSetup;
     }
 
     /**
@@ -97,11 +105,11 @@ trait TraitCommand
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
-        return array_merge(
-            parent::getOptions(),
-            $this->amflOptions()
-        );
+        $this->amflInit();
+        $this->amflOptions();
+
+        return parent::getOptions();
     }
 }

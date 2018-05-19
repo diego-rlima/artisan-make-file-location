@@ -17,6 +17,16 @@ class EventMakeCommand extends OriginalEventMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'event');
+        return $this->amflCustomNamespace($rootNamespace);
+    }
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    protected function amflInit()
+    {
+        $this->amflCommandSetup('event');
     }
 }

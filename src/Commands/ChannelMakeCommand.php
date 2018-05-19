@@ -17,6 +17,16 @@ class ChannelMakeCommand extends OriginalChannelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'channel');
+        return $this->amflCustomNamespace($rootNamespace);
+    }
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    protected function amflInit()
+    {
+        $this->amflCommandSetup('channel');
     }
 }

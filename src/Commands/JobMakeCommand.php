@@ -17,6 +17,16 @@ class JobMakeCommand extends OriginalJobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'job');
+        return $this->amflCustomNamespace($rootNamespace);
+    }
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    protected function amflInit()
+    {
+        $this->amflCommandSetup('job');
     }
 }

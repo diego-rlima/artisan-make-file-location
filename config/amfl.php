@@ -11,25 +11,22 @@ return [
     */
 
     'channel' => '{root}\{prefix}\Broadcasting\{suffix}',
-    'command' => '{root}\{prefix}\Commands\{suffix}',
-    'controller' => '{root}\{prefix}\Controllers\{suffix}',
+    'command' => '{root}\{prefix|default:Console}\Commands\{suffix}',
+    'controller' => '{root}\{prefix|default:Http}\Controllers\{suffix}',
     'event' => '{root}\{prefix}\Events\{suffix}',
     'exception' => '{root}\{prefix}\Exceptions\{suffix}',
     'job' => '{root}\{prefix}\Jobs\{suffix}',
     'listener' => '{root}\{prefix}\Listeners\{suffix}',
     'mail' => '{root}\{prefix}\Mail\{suffix}',
-    'middleware' => '{root}\{prefix}\Middleware\{suffix}',
-    'model' => '{root}\{prefix}\\',
+    'middleware' => '{root}\{prefix|default:Http}\Middleware\{suffix}',
+    'model' => '{root}\{prefix}',
     'notification' => '{root}\{prefix}\Notifications\{suffix}',
     'policy' => '{root}\{prefix}\Policies\{suffix}',
     'provider' => '{root}\{prefix}\Providers\{suffix}',
-    'request' => '{root}\{prefix}\Requests\{suffix}',
-    'resource' => '{root}\{prefix}\Resources\{suffix}',
+    'request' => '{root}\{prefix|default:Http}\Requests\{suffix}',
+    'resource' => '{root}\{prefix|default:Http}\Resources\{suffix}',
     'rule' => '{root}\{prefix}\Rules\{suffix}',
-    'test' => [
-        'feature' => '{root}\{prefix}\Feature\{suffix}',
-        'unit' => '{root}\{prefix}\Unit\{suffix}',
-    ],
+    'test' => '{root}\{prefix}\{type}\{suffix}',
 
     /*
     |--------------------------------------------------------------------------
@@ -41,8 +38,8 @@ return [
     |
     */
 
-    'factory' => '{root}/{prefix}/factories/{name}.php',
-    'migration' => '{root}/{prefix}/migrations',
-    'seeder' => '{root}/{prefix}/seeds/{name}.php',
+    'factory' => '{root}/{prefix|default:database}/factories/{name}.php',
+    'migration' => '{root}/{prefix|default:database}/migrations',
+    'seeder' => '{root}/{prefix|default:database}/seeds/{name}.php',
 
 ];

@@ -17,6 +17,16 @@ class ListenerMakeCommand extends OriginalListenerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'listener');
+        return $this->amflCustomNamespace($rootNamespace);
+    }
+
+    /**
+     * Configure the options.
+     *
+     * @return void
+     */
+    protected function amflInit()
+    {
+        $this->amflCommandSetup('listener');
     }
 }

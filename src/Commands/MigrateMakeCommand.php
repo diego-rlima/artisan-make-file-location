@@ -33,17 +33,17 @@ class MigrateMakeCommand extends OriginalMigrateMakeCommand
             return $basePath.'/'.$targetPath;
         }
 
-        return $this->amflCustomPath($basePath, 'migration', '');
+        return $this->amflCustomPath($basePath, '');
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'database';
+        $this->amflCommandSetup('migration');
     }
 
     /**
@@ -65,15 +65,13 @@ class MigrateMakeCommand extends OriginalMigrateMakeCommand
      */
     protected function getOptions()
     {
-        $options = [
+        $this->amflInit();
+        $this->amflOptions();
+
+        return [
             ['create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'],
             ['table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'],
             ['path', null, InputOption::VALUE_OPTIONAL, 'The location where the migration file should be created.'],
         ];
-
-        return array_merge(
-            $options,
-            $this->amflOptions()
-        );
     }
 }

@@ -17,16 +17,16 @@ class ResourceMakeCommand extends OriginalResourceMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'resource');
+        return $this->amflCustomNamespace($rootNamespace);
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'Http';
+        $this->amflCommandSetup('resource');
     }
 }

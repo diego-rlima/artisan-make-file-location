@@ -17,16 +17,16 @@ class ConsoleMakeCommand extends OriginalConsoleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->amflCustomNamespace($rootNamespace, 'command');
+        return $this->amflCustomNamespace($rootNamespace);
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'Console';
+        $this->amflCommandSetup('command');
     }
 }

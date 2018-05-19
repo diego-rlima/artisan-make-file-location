@@ -17,16 +17,16 @@ class SeederMakeCommand extends OriginalSeederMakeCommand
      */
     protected function getPath($name)
     {
-        return $this->amflCustomPath($this->laravel->basePath(), 'seeder', $name);
+        return $this->amflCustomPath($this->laravel->basePath(), $name);
     }
 
     /**
-     * Get the default prefix.
+     * Configure the options.
      *
-     * @return string
+     * @return void
      */
-    protected function amflDefaultPrefix()
+    protected function amflInit()
     {
-        return 'database';
+        $this->amflCommandSetup('seeder');
     }
 }
