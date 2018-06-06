@@ -65,7 +65,7 @@ class CommandSetup
      * @param  string  $option
      * @return self
      */
-    public function disableOption(string $option)
+    public function disableOption(string $option): self
     {
         unset($this->options[$option]);
 
@@ -77,7 +77,7 @@ class CommandSetup
      *
      * @return self
      */
-    public function loadOptions()
+    public function loadOptions(): self
     {
         foreach (array_keys($this->options) as $option) {
             $this->parse($option);
@@ -107,7 +107,7 @@ class CommandSetup
      * @param  array  $attributes
      * @return void
      */
-    protected function saveOptionData(string $option, array $attributes)
+    protected function saveOptionData(string $option, array $attributes): void
     {
         $data = [
             'required' => $this->isRequired($attributes),
@@ -134,7 +134,7 @@ class CommandSetup
      * @param  array  $attributes
      * @return string|null
      */
-    protected function defaultValue(array $attributes)
+    protected function defaultValue(array $attributes): ?string
     {
         $value = array_first($attributes, function($attribute) {
             return starts_with($attribute, 'default:');
@@ -148,9 +148,9 @@ class CommandSetup
      * the option.
      *
      * @param  string  $option
-     * @return string|false
+     * @return string|null
      */
-    public function match(string $option)
+    public function match(string $option): ?string
     {
         $pattern = '/.*\{' . $option . '([^\}]*).*$/';
 
@@ -160,7 +160,7 @@ class CommandSetup
 
         $this->disableOption($option);
 
-        return false;
+        return null;
     }
 
     /**
@@ -184,11 +184,11 @@ class CommandSetup
      * @param  string  $option
      * @return void
      */
-    protected function parse(string $option)
+    protected function parse(string $option): void
     {
         $match = $this->match($option);
 
-        if ($match !== false) {
+        if (is_string($match)) {
             $attributes = $this->explodeAttributes($match);
 
             $this->saveOptionData($option, $attributes);
@@ -209,15 +209,15 @@ class CommandSetup
      * Gets the option data.
      *
      * @param  string  $option
-     * @return string|false
+     * @return array|null
      */
-    public function getOptionData(string $option)
+    public function getOptionData(string $option): ?array
     {
         if (isset($this->optionsData[$option])) {
             return $this->optionsData[$option];
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -227,7 +227,7 @@ class CommandSetup
      * @param  string  $option
      * @return void
      */
-    protected function validateOption($value, string $option)
+    protected function validateOption($value, string $option): void
     {
         $data = $this->getOptionData($option);
 
@@ -241,7 +241,7 @@ class CommandSetup
      *
      * @return string
      */
-    public function getFormattedConfig()
+    public function getFormattedConfig(): string
     {
         $formatted = $this->config;
 
@@ -265,7 +265,7 @@ class CommandSetup
      *
      * @return string
      */
-    protected function sanitizes($config)
+    protected function sanitizes($config): string
     {
         $patterns = ['/\\\+/', '/\/+/'];
         $replacements = ['\\', '/'];

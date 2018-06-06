@@ -19,7 +19,7 @@ trait TraitCommand
      *
      * @return void
      */
-    abstract protected function amflInit();
+    abstract protected function amflInit(): void;
 
     /**
      * Initializes the settings.
@@ -27,7 +27,7 @@ trait TraitCommand
      * @param  string  $command
      * @return CommandSetup
      */
-    public function amflCommandSetup(string $command)
+    public function amflCommandSetup(string $command): CommandSetup
     {
         $this->amflSetup = new CommandSetup($this, $command);
 
@@ -78,7 +78,7 @@ trait TraitCommand
      *
      * @return void
      */
-    protected function amflOptions()
+    protected function amflOptions(): void
     {
         $this->amflSetup->loadOptions();
 
@@ -95,7 +95,7 @@ trait TraitCommand
      *
      * @return CommandSetup
      */
-    protected function getCommandSetup()
+    protected function getCommandSetup(): CommandSetup
     {
         return $this->amflSetup;
     }

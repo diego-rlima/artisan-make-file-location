@@ -15,7 +15,7 @@ class ModelMakeCommand extends OriginalModelMakeCommand
      * @param  string  $rootNamespace
      * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return $this->amflCustomNamespace($rootNamespace);
     }
@@ -25,7 +25,7 @@ class ModelMakeCommand extends OriginalModelMakeCommand
      *
      * @return void
      */
-    protected function amflInit()
+    protected function amflInit(): void
     {
         $this->amflCommandSetup('model');
     }

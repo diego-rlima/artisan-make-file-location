@@ -15,7 +15,7 @@ class FactoryMakeCommand extends OriginalFactoryMakeCommand
      * @param  string  $name
      * @return string
      */
-    protected function getPath($name)
+    protected function getPath($name): string
     {
         $name = str_replace(
             ['\\', '/'], '', $this->argument('name')
@@ -29,7 +29,7 @@ class FactoryMakeCommand extends OriginalFactoryMakeCommand
      *
      * @return void
      */
-    protected function amflInit()
+    protected function amflInit(): void
     {
         $this->amflCommandSetup('factory');
     }

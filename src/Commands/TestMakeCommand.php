@@ -26,7 +26,7 @@ class TestMakeCommand extends OriginalTestMakeCommand
      * @param  string  $rootNamespace
      * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         $type = $this->option('unit') ? 'Unit' : 'Feature';
         $namespace = $this->amflCustomNamespace($rootNamespace);
@@ -43,7 +43,7 @@ class TestMakeCommand extends OriginalTestMakeCommand
      *
      * @return void
      */
-    protected function amflInit()
+    protected function amflInit(): void
     {
         $this->amflCommandSetup('test');
     }
@@ -53,7 +53,7 @@ class TestMakeCommand extends OriginalTestMakeCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the class.']
@@ -65,7 +65,7 @@ class TestMakeCommand extends OriginalTestMakeCommand
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         $this->amflInit();
         $this->amflOptions();
