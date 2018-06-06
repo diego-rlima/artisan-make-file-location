@@ -52,12 +52,18 @@ class ArtisanServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $commands = CommandsList::toLoad($this->app::VERSION);
+        $customCommands = CommandsList::getCustomCommands();
+        $commandsList = array_values($commands) + array_keys($customCommands);
 
         foreach (array_keys($commands) as $command) {
             call_user_func_array([$this, "register{$command}Command"], []);
         }
 
-        $this->commands(array_values($commands));
+        foreach ($customCommands as $command => $callback) {
+            $this->app->singleton($command, $callback);
+        }
+
+        $this->commands($commandsList);
     }
 
     /**
@@ -310,6 +316,10 @@ class ArtisanServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return array_values(CommandsList::toLoad($this->app::VERSION));
+        $commands = CommandsList::toLoad($this->app::VERSION);
+        $customCommands = CommandsList::getCustomCommands();
+        $commandsList = array_values($commands) + array_keys($customCommands);
+
+        return $commandsList;
     }
 }
