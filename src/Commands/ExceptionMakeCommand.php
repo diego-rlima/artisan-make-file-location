@@ -15,7 +15,7 @@ class ExceptionMakeCommand extends OriginalExceptionMakeCommand
      * @param  string  $rawName
      * @return bool
      */
-    protected function alreadyExists($rawName)
+    protected function alreadyExists($rawName): bool
     {
         $className = $this->getDefaultNamespace($this->rootNamespace()) . "\\$rawName";
 
@@ -28,7 +28,7 @@ class ExceptionMakeCommand extends OriginalExceptionMakeCommand
      * @param  string  $rootNamespace
      * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return $this->amflCustomNamespace($rootNamespace);
     }
@@ -38,7 +38,7 @@ class ExceptionMakeCommand extends OriginalExceptionMakeCommand
      *
      * @return void
      */
-    protected function amflInit()
+    protected function amflInit(): void
     {
         $this->amflCommandSetup('exception');
     }

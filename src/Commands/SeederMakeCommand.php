@@ -15,7 +15,7 @@ class SeederMakeCommand extends OriginalSeederMakeCommand
      * @param  string  $name
      * @return string
      */
-    protected function getPath($name)
+    protected function getPath($name): string
     {
         return $this->amflCustomPath($this->laravel->basePath(), $name);
     }
@@ -25,7 +25,7 @@ class SeederMakeCommand extends OriginalSeederMakeCommand
      *
      * @return void
      */
-    protected function amflInit()
+    protected function amflInit(): void
     {
         $this->amflCommandSetup('seeder');
     }

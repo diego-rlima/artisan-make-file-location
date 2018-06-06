@@ -25,7 +25,7 @@ class MigrateMakeCommand extends OriginalMigrateMakeCommand
      *
      * @return string
      */
-    protected function getMigrationPath()
+    protected function getMigrationPath(): string
     {
         $basePath = $this->laravel->basePath();
 
@@ -41,7 +41,7 @@ class MigrateMakeCommand extends OriginalMigrateMakeCommand
      *
      * @return void
      */
-    protected function amflInit()
+    protected function amflInit(): void
     {
         $this->amflCommandSetup('migration');
     }
@@ -51,7 +51,7 @@ class MigrateMakeCommand extends OriginalMigrateMakeCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the migration.']
@@ -63,7 +63,7 @@ class MigrateMakeCommand extends OriginalMigrateMakeCommand
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         $this->amflInit();
         $this->amflOptions();

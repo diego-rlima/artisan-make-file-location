@@ -4,6 +4,8 @@ namespace DRL\AMFL;
 
 class CommandsList
 {
+    protected static $customCommands = [];
+
     /**
      * Returns all commands that must be loaded, based on the Laravel version.
      *
@@ -21,6 +23,16 @@ class CommandsList
         }
 
         return $load;
+    }
+
+    /**
+     * Returns all custom commands that must be loaded.
+     *
+     * @return array
+     */
+    public static function getCustomCommands(): array
+    {
+        return self::$customCommands;
     }
 
     /**
@@ -58,5 +70,10 @@ class CommandsList
                 'ChannelMake' => 'command.channel.make',
             ],
         ];
+    }
+
+    public static function extend(string $command, callable $callback): void
+    {
+        self::$customCommands[$command] = $callback;
     }
 }
