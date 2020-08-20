@@ -2,7 +2,9 @@
 
 namespace DRL\AMFL;
 
-use Symfony\Component\Console\Command\Command;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 class CommandSetup
@@ -17,7 +19,7 @@ class CommandSetup
     /**
      * The Command instance.
      *
-     * @var \Symfony\Component\Console\Command\Command
+     * @var \Illuminate\Console\Command
      */
     protected $makeCommand;
 
@@ -48,8 +50,8 @@ class CommandSetup
     /**
      * Create a new CommandSetup instance.
      *
-     * @param  \Symfony\Component\Console\Command\Command  $command
-     * @param  string  $command
+     * @param  \Illuminate\Console\Command  $makeCommand
+     * @param  string                       $command
      * @return void
      */
     public function __construct(Command $makeCommand, string $command)
@@ -136,8 +138,8 @@ class CommandSetup
      */
     protected function defaultValue(array $attributes): ?string
     {
-        $value = array_first($attributes, function($attribute) {
-            return starts_with($attribute, 'default:');
+        $value = Arr::first($attributes, function($attribute) {
+            return Str::startsWith($attribute, 'default:');
         }, '');
 
         return str_replace('default:', '', $value);
